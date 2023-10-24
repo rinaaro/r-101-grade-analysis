@@ -58,3 +58,15 @@ kable(grades |>
   count())
 ```
 
+### Q6
+```{r}
+grp_c <- grades |>
+  group_by(Group) |>
+  count()
+grp_c |>
+  ggplot(aes(x=Group, y=n)) +
+  geom_col()+
+  labs(title = "Number of students in each Group.")
+```
+
+
