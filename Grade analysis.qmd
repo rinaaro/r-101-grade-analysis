@@ -17,3 +17,13 @@ library(ggplot2)
 theme_set(theme_bw())
 ```
 
+### Q1
+```{r load_data}
+#| message: false
+grades <- vroom(here("grades.csv"))
+```
+
+
+
+
+
