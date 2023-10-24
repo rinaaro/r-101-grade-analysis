@@ -42,11 +42,19 @@ n <- grades |>
 
 
 ### Q4
-```{r}
+```{r exam_dens}
 grades|>
   filter(!is.na(Exam)) |> 
   ggplot(aes(x=Exam)) +
-  geom_density()
+  geom_density()+
+  labs(title = "Grade distribution of the Exam.")
 ```
 
+
+### Q5
+```{r count_group}
+kable(grades |>
+  group_by(Group) |>
+  count())
+```
 
