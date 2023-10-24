@@ -35,8 +35,12 @@ col.names = c("Minimum", "Maximum", "Mean", "Median"), digits = 1, align = "cccc
 
 ### Q3
 ```{r na_exam}
-n <- grades |> count(anyNA(Exam))
+n <- grades |>
+  count(is.na(Exam))
 ```
-`r n[2]` students did not take the final Exam.
+`r n[2, 2]` students did not take the final Exam.
+
+
+
 
 
