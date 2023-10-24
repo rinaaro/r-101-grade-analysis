@@ -41,6 +41,12 @@ n <- grades |>
 `r n[2, 2]` students did not take the final Exam.
 
 
-
+### Q4
+```{r}
+grades|>
+  filter(!is.na(Exam)) |> 
+  ggplot(aes(x=Exam)) +
+  geom_density()
+```
 
 
