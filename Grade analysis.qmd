@@ -15,6 +15,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 theme_set(theme_bw())
+library(knitr)
 ```
 
 ### Q1
@@ -23,6 +24,14 @@ theme_set(theme_bw())
 grades <- vroom(here("grades.csv"))
 ```
 
+### Q2
+```{r}
+kable(grades |>
+        summarise(min(Exam, na.rm=TRUE), max(Exam, na.rm=TRUE), 
+                  mean(Exam, na.rm=TRUE), median(Exam, na.rm=TRUE)),
+caption = "Minimum, maximum, mean and median grades of Exam", 
+col.names = c("Minimum", "Maximum", "Mean", "Median"), digits = 1, align = "cccc")
+```
 
 
 
