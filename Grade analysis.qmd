@@ -58,7 +58,7 @@ kable(grades |>
 ```
 
 ### Q6
-```{r}
+```{r grp_hist}
 grp_c <- grades |>
   group_by(Group) |>
   count()
@@ -69,4 +69,23 @@ grp_c |>
   guides(x = guide_axis(angle = 90))
 ```
 
+### Q7
+Option 1 - Facet wrap
+```{r facet_exam}
+grades|>
+  filter(!is.na(Exam)) |> 
+  ggplot(aes(x=Exam)) +
+  geom_histogram(bins=20)+
+  labs(title = "Grade distribution of the Exam.")+
+  facet_wrap(~Group)
+```
+
+Option 2 - Boxplot
+```{r box_exam}
+grades|>
+  filter(!is.na(Exam)) |> 
+  ggplot(aes(y=Exam, x=Group)) + 
+  geom_boxplot()+
+  guides(x = guide_axis(angle = 90))
+```
 
