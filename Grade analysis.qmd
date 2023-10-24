@@ -1,9 +1,8 @@
 ---
 title: "Grade analysis"
 author: "Arina Agaronyan"
-format: 
-  html: 
-    echo: false 
+format: html
+code-fold: true
 ---
 
 ```{r config}
@@ -66,7 +65,8 @@ grp_c <- grades |>
 grp_c |>
   ggplot(aes(x=Group, y=n)) +
   geom_col()+
-  labs(title = "Number of students in each Group.")
+  labs(title = "Number of students in each Group.")+
+  guides(x = guide_axis(angle = 90))
 ```
 
 
