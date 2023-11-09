@@ -54,7 +54,8 @@ grades|>
 ```{r count_group}
 kable(grades |>
   group_by(Group) |>
-  count())
+  count(),
+  caption = "Number of students in each group")
 ```
 
 ### Q6
@@ -89,3 +90,13 @@ grades|>
   guides(x = guide_axis(angle = 90))
 ```
 
+
+### Q8
+
+```{r naExam-table}
+kable(grades |> 
+  group_by(Group) |>
+  summarise(sum(c(is.na(Exam)))),
+  caption = "Number of students who missed Exam",
+  col.names = c("Group", "n"))
+```
