@@ -130,3 +130,11 @@ NAperId <- IdGrpLong |>
   summarise(na=sum(is.na(value)))
 ```
 
+
+### Q12
+```{r NA/Id-graph}
+ggplot(NAperId, aes(x=Id, y=na)) +
+  geom_col()+
+  labs(title = "Number of missing grades per student", x="Student Id", y="Number of missing grades")
+```
+
