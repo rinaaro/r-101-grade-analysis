@@ -113,3 +113,11 @@ nagrades |>
   guides(x = guide_axis(angle = 90))
 ```
 
+
+### Q10
+
+```{r IdGrpL}
+IdGrpLong <- grades |>
+  pivot_longer(cols = Exam:Online_MCQ_19)
+```
+
