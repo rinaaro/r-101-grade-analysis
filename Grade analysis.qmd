@@ -15,6 +15,7 @@ library(tidyr)
 library(ggplot2)
 theme_set(theme_bw())
 library(knitr)
+library(stringr)
 ```
 
 ### Q1
@@ -94,10 +95,9 @@ grades|>
 ### Q8
 
 ```{r naExam-table}
-kable(grades |> 
+grades |> 
   group_by(Group) |>
-  summarise(n=sum(c(is.na(Exam)))),
-  caption = "Number of students who missed Exam")
+  summarise(n=sum(c(is.na(Exam))))
 ```
 
 
@@ -136,5 +136,14 @@ NAperId <- IdGrpLong |>
 ggplot(NAperId, aes(x=Id, y=na)) +
   geom_col()+
   labs(title = "Number of missing grades per student", x="Student Id", y="Number of missing grades")
+```
+
+
+### Q13
+```{r NA/Grp}
+IdGrpLong |> 
+  group_by(Group) |>
+  filter(str_starts(name, "Exam")) |>
+  summarise(n=sum(c(is.na(value))))
 ```
 
