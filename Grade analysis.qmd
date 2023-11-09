@@ -96,7 +96,20 @@ grades|>
 ```{r naExam-table}
 kable(grades |> 
   group_by(Group) |>
-  summarise(sum(c(is.na(Exam)))),
-  caption = "Number of students who missed Exam",
-  col.names = c("Group", "n"))
+  summarise(n=sum(c(is.na(Exam)))),
+  caption = "Number of students who missed Exam")
 ```
+
+
+### Q9
+```{r naExam-graph}
+nagrades <- grades |> 
+  group_by(Group) |>
+  summarise(n=sum(c(is.na(Exam))))
+nagrades |>
+  ggplot(aes(x=Group, y=n)) +
+  geom_col()+
+  labs(title = "Number of students who missed Exam in each Group.")+
+  guides(x = guide_axis(angle = 90))
+```
+
