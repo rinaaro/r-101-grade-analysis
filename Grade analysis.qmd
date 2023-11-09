@@ -121,3 +121,12 @@ IdGrpLong <- grades |>
   pivot_longer(cols = Exam:Online_MCQ_19)
 ```
 
+
+### Q11
+
+```{r NA/Id}
+NAperId <- IdGrpLong |>
+  group_by(Id) |>
+  summarise(na=sum(is.na(value)))
+```
+
