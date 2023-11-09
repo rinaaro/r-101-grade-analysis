@@ -147,3 +147,12 @@ IdGrpLong |>
   summarise(n=sum(c(is.na(value))))
 ```
 
+### Q14
+
+```{r OnlineNA/Id}
+IdGrpLong |> 
+  group_by(Id) |>
+  filter(str_starts(name, "Online")) |>
+  summarise(n=sum(c(is.na(value))))
+```
+
