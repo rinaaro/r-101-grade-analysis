@@ -169,4 +169,18 @@ Exam_OnlineNA |>
   labs(title = "Exam grades distribution per number of missing online test grades")
 ```
 
+### Q16
+
+```{r MissedMCQ-Id}
+kable(head(MCQ_NA <- IdGrpLong |> 
+  group_by(Id) |>
+  filter(str_starts(name, "MCQ")) |>
+  summarise("MCQ NA"=sum(c(is.na(value)))) |>
+  mutate(Missed=if_else(`MCQ NA`>0, "TRUE", "FALSE" )) |>
+  select(-`MCQ NA`)), 
+  caption = "First 6 rows of whether an MCQ was Missed or not per Student Id",
+  align = "cc")
+```
+
+
 
