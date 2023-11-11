@@ -53,7 +53,7 @@ grades|>
 
 ### Q5
 ```{r count_group}
-kable(grades |>
+kable(GrpN <- grades |>
   group_by(Group) |>
   count(),
   caption = "Number of students in each group")
@@ -182,5 +182,27 @@ kable(head(MCQ_NA <- IdGrpLong |>
   align = "cc")
 ```
 
+
+
+### Q17
+
+```{r MissedMCQ-Grp}
+MCQ_NA_Grp <- inner_join(MCQ_NA, grades, by=join_by(Id)) |>
+  select(Id, Missed, Group) |>
+  group_by(Group) |>
+  summarise(n=sum(c(Missed=="TRUE")))
+Missed_Grp <- inner_join(MCQ_NA_Grp, GrpN, 
+                           by=join_by(Group), 
+                           suffix = c("_missedMCQ", "_inGroup"))
+```
+
+```{r}
+kable(head(P_Missed_Grp <- Missed_Grp |>
+  mutate(P_Missed = (n_missedMCQ / n_inGroup)*100) |>
+  select(-n_missedMCQ, -n_inGroup)), 
+  caption = "First 6 rows of the % of Students per Group who missed at least one MCQ", 
+  align = "cc", 
+  digits = 1)
+```
 
 
