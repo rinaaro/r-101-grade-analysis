@@ -150,9 +150,23 @@ IdGrpLong |>
 ### Q14
 
 ```{r OnlineNA/Id}
-IdGrpLong |> 
+OnlineNA <- IdGrpLong |> 
   group_by(Id) |>
   filter(str_starts(name, "Online")) |>
-  summarise(n=sum(c(is.na(value))))
+  summarise("Online NA"=sum(c(is.na(value))))
 ```
+
+
+### Q15
+```{r Exam_per_OnlineNA-graph}
+Exam_OnlineNA <- grades |>
+  inner_join(OnlineNA, by = join_by(Id))
+Exam_OnlineNA |>
+  filter(!is.na(Exam)) |> 
+  ggplot(aes(x=Exam))+
+  geom_histogram(bins=25)+
+  facet_wrap(~`Online NA`)+
+  labs(title = "Exam grades distribution per number of missing online test grades")
+```
+
 
