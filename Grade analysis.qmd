@@ -53,7 +53,7 @@ grades|>
 
 ### Q5
 ```{r count_group}
-kable(GrpN <- grades |>
+kable(grades |>
   group_by(Group) |>
   count(),
   caption = "Number of students in each group")
@@ -191,12 +191,12 @@ MCQ_NA_Grp <- inner_join(MCQ_NA, grades, by=join_by(Id)) |>
   select(Id, Missed, Group) |>
   group_by(Group) |>
   summarise(n=sum(c(Missed=="TRUE")))
-Missed_Grp <- inner_join(MCQ_NA_Grp, GrpN, 
+Missed_Grp <- inner_join(MCQ_NA_Grp, grp_c, 
                            by=join_by(Group), 
                            suffix = c("_missedMCQ", "_inGroup"))
 ```
 
-```{r}
+```{r %MissMCQ}
 kable(head(P_Missed_Grp <- Missed_Grp |>
   mutate(P_Missed = (n_missedMCQ / n_inGroup)*100) |>
   select(-n_missedMCQ, -n_inGroup)), 
@@ -206,3 +206,39 @@ kable(head(P_Missed_Grp <- Missed_Grp |>
 ```
 
 
+### Q18
+
+```{r avgEx_PmissMCQ_graph}
+avg_Ex_Grp <- grades |>
+  group_by(Group) |>
+  summarise(avg=mean(Exam, na.rm=TRUE))
+Ex_P_grp <- inner_join(avg_Ex_Grp, 
+                       P_Missed_Grp, 
+                       by = join_by(Group))
+Ex_P_grp |>
+  ggplot(aes(x=avg, y=P_Missed))+
+  geom_col(colour="black")+
+  labs(title = "Mean Exam grade per group as a function of the % of missed MCQ_xx grades", 
+       x="Exam average (mean)", 
+       y="% missed MCQ_xx")
+```
+
+
+
+Or
+
+```{r med_avgEx_PmissMCQ_graph}
+med_avg_Ex_Grp <- grades |>
+  group_by(Group) |>
+  summarise(avg=median(Exam, na.rm=TRUE))
+med_Ex_P_grp <- inner_join(med_avg_Ex_Grp, 
+                           P_Missed_Grp, 
+                           by = join_by(Group))
+med_Ex_P_grp |>
+  ggplot(aes(x=avg, y=P_Missed, fill=P_Missed))+
+  geom_col(color="black")+
+  scale_fill_viridis_c(option = "A")+
+  labs(title = "Median Exam grade per group as a function of the % of missed MCQ_xx grades", 
+       x="Exam average (median)", 
+       y="% missed MCQ_xx")
+```
