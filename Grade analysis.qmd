@@ -78,7 +78,7 @@ grades|>
   filter(!is.na(Exam)) |> 
   ggplot(aes(x=Exam)) +
   geom_histogram(bins=20)+
-  labs(title = "Grade distribution of the Exam.")+
+  labs(title = "Grade distribution of the Exam per Group.")+
   facet_wrap(~Group)
 ```
 
@@ -88,7 +88,8 @@ grades|>
   filter(!is.na(Exam)) |> 
   ggplot(aes(y=Exam, x=Group)) + 
   geom_boxplot()+
-  guides(x = guide_axis(angle = 90))
+  guides(x = guide_axis(angle = 90))+
+  labs(title = "Grade distribution of the Exam per Group.")
 ```
 
 
