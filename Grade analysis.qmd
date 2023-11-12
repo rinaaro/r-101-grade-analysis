@@ -138,10 +138,11 @@ ggplot(NAperId, aes(x=Id, y=na)) +
 
 ### Q13
 ```{r NA/Grp}
-IdGrpLong |> 
+kable(head(IdGrpLong |> 
   group_by(Group) |>
   filter(str_starts(name, "Exam")) |>
-  summarise(n=sum(c(is.na(value))))
+  summarise(n=sum(c(is.na(value))))),
+  caption = "First 6 rows of Number of students who missed Exam in each Group.")
 ```
 
 ### Q14
@@ -194,10 +195,10 @@ Missed_Grp <- inner_join(MCQ_NA_Grp, grp_c,
 ```
 
 ```{r %MissMCQ}
-kable(head(P_Missed_Grp <- Missed_Grp |>
+kable(P_Missed_Grp <- Missed_Grp |>
   mutate(P_Missed = (n_missedMCQ / n_inGroup)*100) |>
-  select(-n_missedMCQ, -n_inGroup)), 
-  caption = "First 6 rows of the % of Students per Group who missed at least one MCQ", 
+  select(-n_missedMCQ, -n_inGroup), 
+  caption = "Percentage of Students per Group who missed at least one MCQ_xx", 
   align = "cc", 
   digits = 1)
 ```
