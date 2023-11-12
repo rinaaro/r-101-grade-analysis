@@ -95,7 +95,7 @@ grades|>
 ### Q8
 
 ```{r naExam-table}
-grades |> 
+nagrades <- grades |> 
   group_by(Group) |>
   summarise(n=sum(c(is.na(Exam))))
 ```
@@ -103,9 +103,6 @@ grades |>
 
 ### Q9
 ```{r naExam-graph}
-nagrades <- grades |> 
-  group_by(Group) |>
-  summarise(n=sum(c(is.na(Exam))))
 nagrades |>
   ggplot(aes(x=Group, y=n)) +
   geom_col()+
